@@ -62,11 +62,11 @@ const RecentProjects = () => {
       <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
         <div
           className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-          // style={{ backgroundColor: "#13162D" }}
+       
         >
           <img src={item.img} alt="bgimg" />
         </div>
-        {/* Make the project image clickable */}
+    
         <a href={item.link} target="_blank" rel="noopener noreferrer">
           <img
             src={item.img}
@@ -105,7 +105,7 @@ const RecentProjects = () => {
           ))}
         </div>
 
-        {/* Make the "Check Live Site" text and icon clickable */}
+ 
         <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
           <p className="flex lg:text-xl md:text-xs text-sm text-white">
             Check Live Site
