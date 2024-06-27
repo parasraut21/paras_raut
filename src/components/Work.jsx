@@ -1,11 +1,7 @@
-import {
-    VerticalTimeline,
-    VerticalTimelineElement,
-  } from "react-vertical-timeline-component";
-  
-  
-  import "react-vertical-timeline-component/style.min.css";
-  
+import React from 'react';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+
   const Work = () => {
 
 
@@ -48,44 +44,23 @@ import {
         },
        
     ];
-
     return (
-      <section className='bg-gradient-to-r from-gray-700 to-gray-900 px-4 sm:px-8 lg:px-16'>
-      <div className='py-12 lg:py-16'>
-        <h3 className='text-4xl sm:text-5xl lg:text-7xl font-bold text-white text-center'>Work Experience</h3>
+      <section className='bg-gradient-to-r from-gray-700 to-gray-900 px-4 sm:px-8 lg:px-16 py-12 lg:py-16'>
+        <h3 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center'>Work Experience</h3>
         <div className='mt-5 flex flex-col text-center gap-3 text-white'>
-          <p className='text-sm sm:text-base lg:text-lg'>
+          <p className='text-xs sm:text-sm lg:text-base'>
             I've worked with all sorts of companies, leveling up my skills and teaming up with smart people. Here's the rundown:
           </p>
         </div>
-
+  
         <div className='mt-12 text-white'>
           <VerticalTimeline>
             {experiences.map((experience, index) => (
-              <VerticalTimelineElement
-                key={experience.company_name}
-                date={experience.date}
-                iconStyle={{ background: experience.iconBg, boxShadow: "0 3px 0 0 #000" }}
-                contentStyle={{
-                  borderTop: `4px solid ${experience.iconBg}`,
-                  boxShadow: "0 3px 15px rgba(0,0,0,0.2)",
-                  margin: "0 1rem",
-                  marginBottom: "20px",
-                }}
-                contentArrowStyle={{ borderRight: `7px solid  ${experience.iconBg}` }}
-              >
-                <div>
-                  <h3 className='text-xl font-semibold text-black'>
-                    {experience.title}
-                  </h3>
-                  <p className='font-medium text-base text-black-500'>
-                    {experience.company_name}
-                  </p>
-                </div>
-
-                <ul className='my-5 list-disc ml-5 space-y-2'>
+              <VerticalTimelineElement key={`experience-${index}`}>
+                <h3 className='text-lg sm:text-xl text-black font-bold'>{experience.title} at {experience.company_name}</h3>
+                <ul className='my-5 list-disc ml-5 space-y-2 sm:ml-8 lg:ml-10'>
                   {experience.points.map((point, index) => (
-                    <li key={`experience-point-${index}`} className='text-black-500/50 font-normal text-sm'>
+                    <li key={`experience-point-${index}`} className='text-black-500/50 font-normal text-sm sm:text-base'>
                       {point}
                     </li>
                   ))}
@@ -94,12 +69,10 @@ import {
             ))}
           </VerticalTimeline>
         </div>
-      </div>
-
-      <hr className='border-slate-200' />
-    </section>
+  
+        <hr className='border-slate-200' />
+      </section>
     );
   };
   
   export default Work;
-  
