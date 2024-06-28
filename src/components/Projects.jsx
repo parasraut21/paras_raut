@@ -1,10 +1,8 @@
-
+import React from 'react';
 import { FaLocationArrow } from "react-icons/fa6";
-
-
+import { motion } from 'framer-motion';
 import { PinContainer } from "@/components/Pin";
 
-  
 
 const RecentProjects = () => {
 
@@ -43,83 +41,95 @@ const RecentProjects = () => {
         },
       ];
 
-  return (
-    <div className="py-20 bg-gradient-to-r from-gray-700 to-gray-900">
-      <h1 className="text-7xl font-bold text-white text-center">
-        <span className="text-purple">Recent projects</span>
-      </h1>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
-      {projects.map((item) => (
-  <div
-    className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
-    key={item.id}
-  >
-    <PinContainer
-      title="Live"
-      href="https://github.com/parasraut21"
-    >
-      <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
-        <div
-          className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-       
-        >
-          <img src={item.img} alt="bgimg" />
-        </div>
+      const backgroundSVG = (
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      );
     
-        <a href={item.link} target="_blank" rel="noopener noreferrer">
-          <img
-            src={item.img}
-            alt="cover"
-            className=" absolute bottom-0 cursor-pointer"
-          />
-        </a>
-      </div>
-
-      <h1 className="font-bold text-white lg:text-2xl md:text-xl text-base line-clamp-1">
-        {item.title}
-      </h1>
-
-      <p
-        className="lg:text-xl lg:font-normal text-white font-light text-sm line-clamp-2"
-        style={{
-          color: "#BEC1DD",
-          margin: "1vh 0",
-        }}
-      >
-        {item.des}
-      </p>
-
-      <div className="flex items-center justify-between mt-7 mb-3">
-        <div className="flex items-center">
-          {item.iconLists.map((icon, index) => (
-            <div
-              key={index}
-              className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-              style={{
-                transform: `translateX(-${5 * index + 2}px)`,
-              }}
-            >
-              <img src={icon} alt="icon5" className="p-2" />
-            </div>
-          ))}
+      return (
+        <div className="py-20 bg-gray-900 relative overflow-hidden">
+          {backgroundSVG}
+          <motion.h1 
+            className="text-5xl md:text-7xl font-bold text-center mb-16 relative z-10"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
+              Recent Projects
+            </span>
+          </motion.h1>
+          
+          <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10 relative z-10">
+            {projects.map((item, index) => (
+              <motion.div
+                key={item.id}
+                className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <PinContainer title="Live" href={item.link}>
+                  <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
+                    <motion.div
+                      className="relative w-full h-full overflow-hidden lg:rounded-3xl"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img src={item.img} alt="bgimg" className="w-full h-full object-cover" />
+                    </motion.div>
+                  </div>
+    
+                  <h1 className="font-bold text-white lg:text-2xl md:text-xl text-base line-clamp-1 mb-2">
+                    {item.title}
+                  </h1>
+    
+                  <p className="lg:text-lg text-gray-300 font-light text-sm line-clamp-2 mb-4">
+                    {item.des}
+                  </p>
+    
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center">
+                      {item.iconLists.map((icon, index) => (
+                        <motion.div
+                          key={index}
+                          className="border border-white/[.2] rounded-full bg-gray-800 lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
+                          style={{
+                            transform: `translateX(-${5 * index + 2}px)`,
+                          }}
+                          whileHover={{ scale: 1.1, zIndex: 10 }}
+                        >
+                          <img src={icon} alt={`icon${index}`} className="p-2" />
+                        </motion.div>
+                      ))}
+                    </div>
+    
+                    <motion.a 
+                      href={item.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center group"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <p className="flex lg:text-lg text-sm text-gray-300 group-hover:text-white transition-colors">
+                        Check Live Site
+                      </p>
+                      <FaLocationArrow className="ms-3 text-purple-400 group-hover:text-white transition-colors" />
+                    </motion.a>
+                  </div>
+                </PinContainer>
+              </motion.div>
+            ))}
+          </div>
+          <hr className='border-gray-800 mt-16 relative z-10' />
         </div>
-
- 
-        <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-          <p className="flex lg:text-xl md:text-xs text-sm text-white">
-            Check Live Site
-          </p>
-          <FaLocationArrow className="ms-3" color="#CBACF9" />
-        </a>
-      </div>
-    </PinContainer>
-  </div>
-))}
-      </div>
-      <hr className='border-slate-200' />
-  
-    </div>
-  );
-};
-
-export default RecentProjects;
+      );
+    };
+    
+    export default RecentProjects;

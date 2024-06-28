@@ -1,40 +1,48 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Intro = ({ onDone }) => { // Use onDone instead of setIsIntroDone
+const Intro = ({ onDone }) => {
   const greetings = [
-    'Hello', // English
-    'नमस्ते', // Hindi
-    'नमस्कार', // Marathi
-    'ہیلو', // Urdu
-    'Hola', // Spanish
-    'Bonjour', // French
-    'こんにちは', // Japanese
-    '안녕하세요', // Korean
-    'Привет', // Russian
-    'Guten Tag', // German
-    // Add more greetings as needed
+    'Hello', 'नमस्ते', 'नमस्कार', 'ہیلو', 'Hola', 'Bonjour', 'こんにちは', '안녕하세요', 'Привет', 'Guten Tag',
   ];
 
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
 
   useEffect(() => {
     if (currentGreetingIndex >= greetings.length) {
-      onDone(); // Call onDone when the intro sequence is complete
+      onDone();
       return;
     }
 
     const timer = setTimeout(() => {
       setCurrentGreetingIndex(currentGreetingIndex + 1);
-    }, 300); // Adjusted time for quicker transitions
+    }, 500); // Slightly increased for better readability
 
     return () => clearTimeout(timer);
-  }, [currentGreetingIndex, greetings.length, onDone]); // Include onDone in the dependency array
+  }, [currentGreetingIndex, greetings.length, onDone]);
 
   return (
-    <div className="fixed inset-0 bg-black flex items-center justify-center">
-      <h1 className="text-white text-4xl font-bold">
-        {greetings[currentGreetingIndex] || 'Welcome!'}
-      </h1>
+    <div className="fixed inset-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 opacity-20">
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.h1
+          key={currentGreetingIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="text-white text-6xl font-bold z-10"
+        >
+          {greetings[currentGreetingIndex] || 'Welcome!'}
+        </motion.h1>
+      </AnimatePresence>
     </div>
   );
 };
