@@ -139,8 +139,8 @@ function Home() {
           {['LinkedIn', 'GitHub', 'Download CV'].map((item) => (
             <motion.a
               key={item}
-              href={item === 'LinkedIn' ? "https://linkedin.com/in/parasraut" : 
-                    item === 'GitHub' ? "https://github.com/parasraut" : 
+              href={item === 'LinkedIn' ? "https://www.linkedin.com/in/paras-raut/" : 
+                    item === 'GitHub' ? "https://github.com/parasraut21" : 
                     "./Paras_Raut_Resume.pdf"}
               className="text-lg md:text-xl lg:text-2xl text-gray-400 hover:text-white flex items-center mb-4 justify-center md:justify-end group"
               whileHover={{ scale: 1.1, x: 10 }}

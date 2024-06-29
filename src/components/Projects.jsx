@@ -8,7 +8,14 @@ const RecentProjects = () => {
 
     const projects = [
         {
-          id: 1,
+          id: 0,
+          title: "QuizMaster - Online Quiz Game",
+          des: "Embark on a journey of knowledge. Create mind-bending quizzes or challenge yourself with quizzes crafted by others.",
+          img: "/qz.png",
+          iconLists: ["/re.svg", "/tail.svg", "/ts.svg"],
+          link: "https://quizmaster-peach.vercel.app/",
+        },
+          {id: 1,
           title: "BlocksGaming - The Future of Online Gaming",
           des: "Powered by Next.js, Node.js, Express.js, Web3.js, Socket.io, TypeScript, Taquito, Tailwind CSS, Prisma, chess.js, & Context API,along with IPFS & NFTs",
           img: "/blo.png",
